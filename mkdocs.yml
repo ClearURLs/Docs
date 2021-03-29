@@ -1,0 +1,103 @@
+site_name: ClearURLs
+site_description: ClearURLs Documentation
+site_author: ClearURLs
+site_url: https://docs.clearurls.xyz
+dev_addr: 0.0.0.0:8000
+
+repo_name: 'ClearURLs/Addon'
+repo_url: 'https://github.com/ClearURLs/Addon'
+
+edit_uri: https://github.com/ClearURLs/docs/-/edit/master/content
+
+docs_dir: 'content'
+
+# https://squidfunk.github.io/mkdocs-material/
+theme:
+  name: 'material'
+  language: en
+  include_sidebar: true
+  favicon: assets/img/favicon.ico
+  logo: assets/img/logo-inverse.svg
+  features:
+    - navigation.instant
+    - navigation.top
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: orange
+      accent: red
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: orange
+      accent: red
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  i18n:
+    prev: 'Previous'
+    next: 'Next'
+  icon:
+    repo: fontawesome/brands/github
+
+copyright: "Copyright &copy; 2021 ClearURLs"
+
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ClearURLs/Addon
+      name: GitHub repo of ClearURLs
+    - icon: fontawesome/brands/gitlab
+      link: https://gitlab.com/KevinRoebert/ClearUrls
+      name: GitLab repo of ClearURLs
+#    - icon: fontawesome/brands/docker
+#      link: https://hub.docker.com/r/
+#      name: Docker repo of ClearURLs
+    - icon: fontawesome/brands/gitter
+      link: https://gitter.im/ClearURLs/ClearURLs
+      name: Connect to ClearURLs on Gitter
+
+extra_css:
+  - assets/style/content.css
+  - assets/style/atom-one-light.css
+
+extra_javascript:
+  - assets/js/mermaid.min.js
+  - assets/js/hljs/highlight.min.js # Download from https://highlightjs.org/download/
+  - assets/js/extra.js
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: date
+      fallback_to_build_date: true
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      use_pygments: false # hljs is used instead of pygment for TOML highlighting support
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      # make exceptions to highlighting of code:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - pymdownx.tasklist
+  - attr_list
+  - pymdownx.tabbed
+
+# Page tree
+nav:
+  - 'Overview': 'index.md'
+  - 'Permissions': 'permissions.md'
+  - 'Specifications':
+    - 'Rules': 'specs/rules.md'
