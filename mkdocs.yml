@@ -7,7 +7,7 @@ dev_addr: 0.0.0.0:8000
 repo_name: 'ClearURLs/Addon'
 repo_url: 'https://github.com/ClearURLs/Addon'
 
-edit_uri: https://github.com/ClearURLs/docs/-/edit/master/content
+edit_uri: https://gitlab.com/anti-tracking/ClearURLs/docs/-/edit/master/content
 
 docs_dir: 'content'
 
