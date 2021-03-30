@@ -103,6 +103,9 @@ markdown_extensions:
 # Page tree
 nav:
   - 'Overview': 'index.md'
+  - 'FAQ': 'faq.md'
   #- 'Permissions': 'permissions.md'
   - 'Specifications':
     - 'Rule Catalogs': 'specs/rules.md'
+  - 'Further Readings':
+    - 'Similar Addons': 'further_readings/similar_addons.md'
