@@ -13,14 +13,14 @@
         <meta name="author" content="ClearURLs">
       
       
-        <link rel="canonical" href="https://docs.clearurls.xyz/permissions/">
+        <link rel="canonical" href="https://docs.clearurls.xyz/faq/">
       
       <link rel="icon" href="../assets/img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
     
     
       
-        <title>Permissions - ClearURLs</title>
+        <title>FAQ - ClearURLs</title>
       
     
     
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Permissions
+              FAQ
             
           </span>
         </div>
@@ -253,11 +253,18 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../faq/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         FAQ
       </a>
+      
     </li>
   
 
@@ -358,14 +365,43 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://gitlab.com/anti-tracking/ClearURLs/docs/-/edit/master/content/permissions.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://gitlab.com/anti-tracking/ClearURLs/docs/-/edit/master/content/faq.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                  <h1>Permissions</h1>
+                  <h1>FAQ</h1>
                 
-                
+                <details class="faq"><summary>I have suggestions or complaints. Where can I submit them?</summary><p>If you have any suggestions or complaints, please <a href="https://gitlab.com/KevinRoebert/ClearUrls/issues/new">create an issue</a>.</p>
+</details>
+<details class="faq"><summary>Before a clean URL was visible, a dirty URL was briefly in the URL bar. Does ClearURLs work correctly?</summary><p>Sometimes a dirty URL appears initially in the URL bar before a clean URL is displayed. 
+This does not mean that the dirty URL has been called. ClearURLs checks all requests made through the browser, 
+whether initiated by a user or by a background process. Each request passes through ClearURLs' filter, 
+which is incremental, meaning that sometimes a URL that is not yet clean is passed back to the browser. 
+This URL passes through the filter of ClearURLs again before the actual call and is then further cleaned in 
+the next step. This happens until ClearURLs make no more changes to the URL, then the URL leaves the filter of 
+ClearURLs. It is therefore possible that a URL that is not clean may temporarily appear in the URL bar. 
+To make sure that the URL is indeed cleaned correctly, you can use the integrated Cleaning Tool. 
+Here you can clean the resulting URL again and again until no more changes occur, then you have the final clean URL.</p>
+</details>
+<details class="faq"><summary>How can I quickly check if ClearURLs do work correctly?</summary><p>You can visit the <a href="https://test.clearurls.xyz/">test page</a> of ClearURLs. 
+If only green emojis shines on the page, ClearURLs works correctly. 
+Otherwise, there is an error. Please do not forget to activate JavaScript for this test page.</p>
+</details>
+<details class="faq"><summary>Why does ClearURLs require permission X?</summary><p>An explanation for all required permissions can be found here: <a href="../permissions/">Permissions</a></p>
+</details>
+<details class="faq"><summary>For which browsers is ClearURLs available?</summary><p>ClearURLs is currently officially supported by Mozilla Firefox, Google Chrome, and Microsoft Edge.
+However, it should theoretically be possible to run the addon in all Firefox- or Chrome-based browsers.</p>
+<p><a href="https://addons.mozilla.org/firefox/addon/clearurls/"><img align="left" alt="for Firefox" loading="lazy" src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" width="180px" /></a>
+<a href="https://microsoftedge.microsoft.com/addons/detail/mdkdmaickkfdekbjdoojfalpbkgaddei"><img align="left" alt="for Edge" loading="lazy" src="https://gitlab.com/KevinRoebert/ClearUrls/-/raw/master/promotion/MEA-button.png" width="180px" /></a>
+<a href="https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk"><img align="left" alt="for Chrome" loading="lazy" src="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png" width="180px" /></a></p>
+</details>
+<details class="faq"><summary>Where do I find the packed version of the addon, e.g. for debugging?</summary><p>Here you can download the packed files for Firefox- or Chrome-based browsers: 
+<a href="https://gitlab.com/KevinRoebert/ClearUrls/-/jobs/artifacts/master/raw/ClearUrls.zip?job=bundle%20addon">https://gitlab.com/KevinRoebert/ClearUrls/-/jobs/artifacts/master/raw/ClearUrls.zip?job=bundle%20addon</a></p>
+</details>
+<details class="faq"><summary>How can I enable the logging feature in ClearURLs?</summary><p>Here you can find a step-by-step tutorial on „How to enable logging in ClearURLs“:
+<a href="https://www.youtube-nocookie.com/embed/Rm1YkwXQDSM">https://www.youtube-nocookie.com/embed/Rm1YkwXQDSM</a></p>
+</details>
                 
                   
                     
@@ -374,7 +410,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">March 29, 2021</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">March 30, 2021</span>
     
   </small>
 </div>
@@ -398,6 +434,39 @@
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href=".." class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Overview
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../specs/rules/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Rule Catalogs
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
