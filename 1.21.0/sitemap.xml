@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://docs.clearurls.xyz/</loc>
-     <lastmod>2021-03-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://docs.clearurls.xyz/permissions/</loc>
-     <lastmod>2021-03-29</lastmod>
+     <lastmod>2021-03-30</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.clearurls.xyz/specs/rules/</loc>
-     <lastmod>2021-03-29</lastmod>
+     <lastmod>2021-03-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
