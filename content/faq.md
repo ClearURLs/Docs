@@ -30,7 +30,7 @@
 
 ??? faq "Where do I find the packed version of the addon, e.g. for debugging?"
     Here you can download the packed files for Firefox- or Chrome-based browsers: 
-    [https://gitlab.com/KevinRoebert/ClearUrls/-/jobs/artifacts/master/raw/ClearUrls.zip?job=bundle%20addon](https://gitlab.com/KevinRoebert/ClearUrls/-/jobs/artifacts/master/raw/ClearUrls.zip?job=bundle%20addon)
+    [https://gitlab.com/KevinRoebert/ClearUrls/-/jobs/artifacts/master/raw/ClearURLs.zip?job=bundle%20addon](https://gitlab.com/KevinRoebert/ClearUrls/-/jobs/artifacts/master/raw/ClearUrls.zip?job=bundle%20addon)
 
 ??? faq "How can I enable the logging feature in ClearURLs?"
     Here you can find a step-by-step tutorial on „How to enable logging in ClearURLs“:
