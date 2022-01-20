@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://docs.clearurls.xyz/</loc>
-     <lastmod>2021-12-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://docs.clearurls.xyz/faq/</loc>
-     <lastmod>2021-12-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://docs.clearurls.xyz/specs/rules/</loc>
-     <lastmod>2021-12-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://docs.clearurls.xyz/further_readings/similar_addons/</loc>
-     <lastmod>2021-12-29</lastmod>
-     <changefreq>daily</changefreq>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://docs.clearurls.xyz/1.22.0/</loc>
+         <lastmod>2022-01-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://docs.clearurls.xyz/1.22.0/faq/</loc>
+         <lastmod>2022-01-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://docs.clearurls.xyz/1.22.0/permissions/</loc>
+         <lastmod>2022-01-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://docs.clearurls.xyz/1.22.0/further_readings/similar_addons/</loc>
+         <lastmod>2022-01-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://docs.clearurls.xyz/1.22.0/specs/rules/</loc>
+         <lastmod>2022-01-20</lastmod>
+         <changefreq>daily</changefreq>
     </url>
 </urlset>
