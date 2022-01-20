@@ -43,7 +43,7 @@ theme:
   icon:
     repo: fontawesome/brands/github
 
-copyright: "Copyright &copy; 2021 ClearURLs"
+copyright: "Copyright &copy; 2021-2022 ClearURLs"
 
 extra:
   version:
