@@ -109,3 +109,4 @@ nav:
     - 'Rule Catalogs': 'specs/rules.md'
   - 'Further Readings':
     - 'Similar Addons': 'further_readings/similar_addons.md'
+    - 'Excluded Fields': 'further_readings/excluded_fields.md'
