@@ -1,3 +1,7 @@
+# Overview
+
+This repository includes the source files used to build the documentation used for the official documentation site. You can visit the official documentation site here: https://docs.clearurls.xyz/
+
 # Build
 
 Use the given Makefile to build the doc: `make docs`
