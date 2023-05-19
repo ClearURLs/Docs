@@ -1,5 +1,5 @@
 ??? faq "I have suggestions or complaints. Where can I submit them?"
-    If you have any suggestions or complaints, please [create an issue](https://gitlab.com/KevinRoebert/ClearUrls/issues/new).
+    If you have any suggestions or complaints, please [create an issue](https://gitlab.com/ClearURLs/ClearUrls/-/issues/new).
 
 ??? faq "Before a clean URL was visible, a dirty URL was briefly in the URL bar. Does ClearURLs work correctly?"
     Sometimes a dirty URL appears initially in the URL bar before a clean URL is displayed. 
