@@ -29,7 +29,7 @@ Every provider has the parent element **providers**, it holds the reference to a
 Every provider has the following properties:
 
 - `urlPattern` (required)
-- `completeProvider` (required)
+- `completeProvider` (optional)
 - `rules` (optional)
 - `rawRules` (optional)
 - `referralMarketing` (optional)
