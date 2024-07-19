@@ -72,7 +72,7 @@ The typical structure is `<protocol><subdomain><domain name><TLD><directorie>?<f
 
 In most cases the following expression covers all the needs, you only have to substitute the remaining `<>` 
 fields: `^https?://(?:[a-z0-9-]+\\.)*?<domain name>\\.<TLD>`. If you want to match with every TLD, 
-you can substitute the TLD field with `(?:[a-z]{2,}){1,}`.
+you can substitute `\\.<TLD>` with `(?:\\.[a-z]{2,}){1,}`.
 
 ### `completeProvider`
 The **completeProvider** is a boolean, that determines if every URL that matches the **urlPattern** will be blocked. 
