@@ -43,7 +43,7 @@ theme:
   icon:
     repo: fontawesome/brands/github
 
-copyright: "Copyright &copy; 2021-2022 ClearURLs"
+copyright: "Copyright &copy; 2021-2025 ClearURLs"
 
 extra:
   version:
@@ -58,12 +58,9 @@ extra:
 #    - icon: fontawesome/brands/docker
 #      link: https://hub.docker.com/r/
 #      name: Docker repo of ClearURLs
-    - icon: fontawesome/brands/gitter
-      link: https://gitter.im/ClearURLs/ClearURLs
-      name: Connect to ClearURLs on Gitter
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/clearurls
-      name: Connect to ClearURLs on Twitter
+    - icon: fontawesome/brands/mastodon
+      link: https://infosec.exchange/@clearurls
+      name: Connect to ClearURLs on Mastodon
 
 extra_css:
   - assets/style/content.css
