@@ -25,7 +25,7 @@
     However, it should theoretically be possible to run the addon in all Firefox- or Chrome-based browsers.
 
     [![for Firefox](https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg){ loading=lazy width=180px align=left}](https://addons.mozilla.org/firefox/addon/clearurls/)
-    [![for Edge](https://gitlab.com/KevinRoebert/ClearUrls/-/raw/master/promotion/MEA-button.png){ loading=lazy width=180px align=left}](https://microsoftedge.microsoft.com/addons/detail/mdkdmaickkfdekbjdoojfalpbkgaddei)
+    [![for Edge](https://docs.clearurls.xyz/1.22.0/assets/img/MEA-button.png){ loading=lazy width=180px align=left}](https://microsoftedge.microsoft.com/addons/detail/mdkdmaickkfdekbjdoojfalpbkgaddei)
     [![for Chrome](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png){ loading=lazy width=180px align=left}](https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk)
 
 ??? faq "Where do I find the packed version of the addon, e.g. for debugging?"
