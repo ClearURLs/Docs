@@ -45,7 +45,13 @@ Indeed most of the above URL is tracking code. Once ClearURLs has cleaned the ad
 ## Download
 !!! info ""
     [![for Firefox](https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg){ loading=lazy width=180px align=left}](https://addons.mozilla.org/firefox/addon/clearurls/)
-    [![for Edge](https://docs.clearurls.xyz/1.22.0/assets/img/MEA-button.png){ loading=lazy width=180px align=left}](https://microsoftedge.microsoft.com/addons/detail/mdkdmaickkfdekbjdoojfalpbkgaddei)
+
+!!! warning "Chrome, Edge & Brave users"
+    Google is removing the *Manifest V2* technology ClearURLs is built on, so Chrome-based
+    browsers (including Brave) may disable the add-on automatically until a Manifest V3
+    version is available, and Microsoft Edge is expected to follow the same plan.
+    **Firefox is not affected.** You can read more about it
+    [here](troubleshooting.md#mv2).
 
 ## Donation
 !!! info ""

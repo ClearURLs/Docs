@@ -93,6 +93,7 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_div_format
   - pymdownx.tasklist
+  - pymdownx.keys
   - attr_list
   - pymdownx.tabbed
   - pymdownx.critic
@@ -101,9 +102,13 @@ markdown_extensions:
 nav:
   - 'Overview': 'index.md'
   - 'FAQ': 'faq.md'
+  - 'Troubleshooting': 'troubleshooting.md'
+  - 'Report a buggy website': 'reporting.md'
   - 'Permissions': 'permissions.md'
   - 'Specifications':
     - 'Rule Catalogs': 'specs/rules.md'
+    - 'New Rule Format': 'specs/new-rules.md'
+    - 'Compiled Lists': 'specs/compiled-lists.md'
   - 'Further Readings':
     - 'Similar Addons': 'further_readings/similar_addons.md'
     - 'Excluded Fields': 'further_readings/excluded_fields.md'

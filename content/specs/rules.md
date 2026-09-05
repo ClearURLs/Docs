@@ -29,7 +29,7 @@ Every provider has the parent element **providers**, it holds the reference to a
 Every provider has the following properties:
 
 - `urlPattern` (required)
-- `completeProvider` (required)
+- `completeProvider` (optional)
 - `rules` (optional)
 - `rawRules` (optional)
 - `referralMarketing` (optional)
@@ -43,7 +43,6 @@ Every provider has the following properties:
         "providers": {
             "provider name": {
                 "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?domainName\\.com",
-                "completeProvider": false,
                 "rules": [
                     "trackingField",
                 ],
@@ -58,8 +57,7 @@ Every provider has the following properties:
                 ],
                 "redirections": [
                     "^https?://(?:[a-z0-9-]+\\.)*?domainName\\.com.*url\\?.*url=([^&]+)"
-                ],
-                "forceRedirection": false
+                ]
             }
         }
     }
@@ -76,7 +74,8 @@ you can substitute the TLD field with `(?:[a-z]{2,}){1,}`.
 
 ### `completeProvider`
 The **completeProvider** is a boolean, that determines if every URL that matches the **urlPattern** will be blocked. 
-If you want to specify rules, exceptions, and/or redirections, the value of **completeProvider** must be `false`.
+If you want to specify rules, exceptions, and/or redirections, the value of **completeProvider** must not be enabled.
+If the property is omitted, it is treated as not enabled.
 
 ### `rules`
 The **rules** property is a JSON array. Every element in this array will be automatically rewritten to 
