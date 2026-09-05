@@ -1,9 +1,14 @@
-FROM python:3.9.2
+# Builds the documentation site with Fumadocs (Next.js, fully static export).
+FROM node:22-alpine
 
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.local/bin
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN corepack enable
 
-COPY requirements.txt /mkdocs/
-WORKDIR /mkdocs
-VOLUME /mkdocs
+WORKDIR /work
+COPY package.json package-lock.json* ./
+RUN npm ci --no-audit --no-fund || npm install --no-audit --no-fund
 
-RUN pip install --user -r requirements.txt
+COPY . .
+
+# Default: produce the fully static site into ./out
+CMD ["npm", "run", "build"]

@@ -1,31 +1,34 @@
-
 #######
-# This Makefile contains all targets related to the documentation
+# Documentation site (Fumadocs / Next.js, fully static)
 #######
-CLEARURLS_DOCS_BUILD_IMAGE ?= clearurls-docs
 
-SITE_DIR := $(CURDIR)/site
+NODE_IMAGE ?= node:22-alpine
+OUT_DIR := $(CURDIR)/out
 
-DOCKER_RUN_DOC_PORT := 8000
-DOCKER_RUN_DOC_MOUNTS := -v $(CURDIR):/mkdocs
-DOCKER_RUN_DOC_OPTS := --rm $(DOCKER_RUN_DOC_MOUNTS) -p $(DOCKER_RUN_DOC_PORT):8000
+DOCKER_RUN_DOC_MOUNTS := -v $(CURDIR):/work -w /work
+DOCKER_RUN_DOC_OPTS := --rm $(DOCKER_RUN_DOC_MOUNTS)
 
-# Default: generates the documentation into $(SITE_DIR)
-docs: docs-clean docs-image docs-build
+# Default: full static build into ./out
+docs: docs-clean docs-build
 
-# Writer Mode: build and serve docs on http://localhost:8000 with mkdocs
-docs-serve: docs-image
-	docker run  $(DOCKER_RUN_DOC_OPTS) $(CLEARURLS_DOCS_BUILD_IMAGE) mkdocs serve
+# Writer mode: dev server on http://localhost:8000
+docs-serve:
+	docker run $(DOCKER_RUN_DOC_OPTS) -p 8000:3000 $(NODE_IMAGE) sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm i --frozen-lockfile || pnpm i; exec pnpm dev -p 3000"
 
-# Utilities Targets for each step
-docs-image:
-	docker build -t $(CLEARURLS_DOCS_BUILD_IMAGE) -f docs.Dockerfile ./
+docs-build:
+	docker run $(DOCKER_RUN_DOC_OPTS) $(NODE_IMAGE) sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm i --frozen-lockfile || pnpm i && pnpm build"
 
-docs-build: docs-image
-	docker run $(DOCKER_RUN_DOC_OPTS) $(CLEARURLS_DOCS_BUILD_IMAGE) sh -c "mkdocs build \
-		&& chown -R $(shell id -u):$(shell id -g) ./site"
+# Local (no docker) variants
+install:
+	npm install
+
+dev:
+	npm run dev
+
+build:
+	npm run build
 
 docs-clean:
-	rm -rf $(SITE_DIR)
+	rm -rf $(OUT_DIR) .next
 
-.PHONY: all docs docs-clean docs-build
+.PHONY: docs docs-serve docs-build install dev build docs-clean

@@ -1,0 +1,81 @@
+---
+title: "Permissions"
+description: "The browser permissions used by ClearURLs and why they are needed."
+icon: ShieldCheck
+---
+
+ClearURLs needs a handful of WebExtension permissions to do its job.
+Each one is tied to a concrete feature — no surplus privileges. Below you can see what
+every permission does and which feature in the add-on depends on it.
+
+<Accordions>
+
+<Accordion title="&lt;all_urls&gt; — clean URLs on every page">
+
+Redirecting and cleaning needs to run on every site (HTTPS, HTTP, even `data:` URLs).
+Without `all_urls` we'd have to ask for the host permission of every page you visit —
+which is hardly better.
+
+[MDN: Match patterns](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Match_patterns#%3call_urls%3e)
+
+</Accordion>
+
+<Accordion title="webRequest + webRequestBlocking — intercept before the request leaves">
+
+These two are the core of ClearURLs. They let the add-on see every outgoing request,
+rewriting the URL before the browser sends anything. Without them, no cleaning on page
+load would be possible.
+
+[MDN: webRequest](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest) ·
+[MDN: webRequestBlocking](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/BlockingResponse)
+
+</Accordion>
+
+<Accordion title="storage — persist settings, rules and logs">
+
+Stores user configuration and (if enabled) the local cleaned-URL log. Everything lives
+on your computer; nothing is sent to a server.
+
+[MDN: Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Storage)
+
+</Accordion>
+
+<Accordion title="unlimitedStorage — beyond 5 MB for logs">
+
+The default `storage.local` quota is 5 MB. With logging enabled, that fills up fast and
+the add-on would break. We ask for `unlimitedStorage` so this doesn't happen. The plan
+is to make this permission optional in a future release.
+
+</Accordion>
+
+<Accordion title="contextMenus — the right-click «Copy Clean Link Location» entry">
+
+Powers the context menu entry you see when you right-click a link — the shortcut
+for copying a tracking-free URL without first visiting it.
+
+[MDN: menus](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/menus)
+
+</Accordion>
+
+<Accordion title="webNavigation + tabs — prevent history-API tracking">
+
+Some websites re-inject tracking parameters into the URL after page load via the
+history API. These two permissions let ClearURLs listen for that and roll the change
+back. If you don't want this protection, you can turn the feature off in
+*Settings → Prevent tracking injection over history API*, then click *Save & reload*.
+
+[MDN: webNavigation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webNavigation) ·
+[MDN: tabs](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs)
+
+</Accordion>
+
+<Accordion title="downloads — save log/settings exports">
+
+Required to save the JSON files you get from *Export log* or *Export settings*. Like
+`unlimitedStorage`, we plan to make this optional.
+
+[MDN: downloads](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/downloads)
+
+</Accordion>
+
+</Accordions>

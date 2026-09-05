@@ -1,0 +1,12 @@
+# Netlify deployment (fully static, no runtime).
+#
+# The build exports extensionless doc pages as `out/faq.html`; Netlify serves
+# them at /faq (its default "pretty URL" behavior) which keeps the public URLs
+# from the old mike deployment working. The /latest/ alias is materialized by
+# scripts/post-export.mjs during the build.
+[build]
+  command = "npm ci && npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"

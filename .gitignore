@@ -1,2 +1,16 @@
+# Node
+node_modules/
+.npm-cache/
+
+# Next.js / Fumadocs
+.next/
+out/
+.source/
+next-env.d.ts
+
+# Legacy MkDocs output
 site/
+
+# OS / editor
+.DS_Store
 .idea/

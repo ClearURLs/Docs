@@ -1,0 +1,295 @@
+---
+title: "Troubleshooting"
+description: "Step-by-step help when a website does not work while ClearURLs is turned on."
+icon: Wrench
+---
+
+Something does not work while ClearURLs is turned on?
+This page helps you find out **whether ClearURLs is the cause** and **what you can do about it**,
+step by step, without any technical knowledge.
+
+<Callout type="info" title="The two most important things first">
+
+1. If a website does not work, [turn the filter off and reload the page](#first-check). In most cases this immediately tells you whether ClearURLs is involved.
+2. If you want to report a problem, please read [How to report a buggy website](/reporting). A good report helps us fix the problem much faster.
+
+</Callout>
+---
+
+## First check: is ClearURLs causing the problem? [#first-check]
+
+ClearURLs removes tracking fields from addresses (URLs). Very rarely a website needs one of
+these fields and stops working correctly without it. This is how you find out. It takes less than
+a minute:
+
+1. Open the website that has the problem.
+2. Click the **ClearURLs icon** in your browser toolbar (the orange logo next to the address bar).
+3. In the small window that opens, find the section **Configs** and turn the switch
+   **Filter** off.
+4. **Reload the website** (press the <kbd>f5</kbd> key or click the reload button).
+5. Try again what did not work before.
+
+**What does the result mean?**
+
+- **The website now works:** ClearURLs is involved in the problem.
+  Turn the **Filter** switch on again and continue reading in
+  [Known problems and fixes](#known-problems) below. For many websites there is already a solution.
+- **The website still does not work:** ClearURLs is probably *not* the cause.
+  Please also check other extensions (for example ad blockers) or the website itself.
+  Do not forget to turn the **Filter** switch back on.
+
+<Callout type="info" title="Turning the filter off does not uninstall anything">
+
+The **Filter** switch only pauses the cleaning. Your settings and the rules stay in place.
+You can turn it back on at any time with the same switch.
+
+</Callout>
+If you want to know what exactly ClearURLs changes on a specific address, you can also use the
+built-in **Cleaning Tool**: click the ClearURLs icon and choose the **wrench-and-screwdriver icon**
+(screwdriver and wrench crossed), paste the address there and press **Clean URLs**.
+This shows you the cleaned address without visiting the website.
+
+---
+
+## Known problems and fixes [#known-problems]
+
+The following problems have been **reported by users**. The list shows the current state of our
+knowledge. When a problem is fixed in the rules or in the add-on, it disappears from here.
+Behind every entry you find a link to the public bug report with all technical details.
+
+<details className="fd-details" data-oldid="google-ai-mode-and-ai-overviews-show-error-400-or-nothing-at-all">
+<summary>Google: AI Mode and AI Overviews show error 400 or nothing at all</summary>
+
+**What happens:** When you use Google's *AI Mode*, or when a search would show an
+*AI Overview*, you instead get an error page ("400. That's an error.") or the answer
+simply does not appear.
+
+**Why:** Google checks parts of the address very strictly. A field that ClearURLs removes
+is expected by the AI feature, so Google refuses the request.
+
+**What you can do:**
+
+- Deactivate the **Filter** switch (see [above](#first-check)) while you use the AI search, or
+- wait for a rules update. The problem is known and being worked on. The add-on updates
+  its rules automatically.
+
+**Bug reports:** [Addon #495](https://github.com/ClearURLs/Addon/issues/495),
+[Addon #508](https://github.com/ClearURLs/Addon/issues/508),
+[Addon #522](https://github.com/ClearURLs/Addon/issues/522),
+[Rules #182](https://github.com/ClearURLs/Rules/issues/182)
+
+</details>
+<details className="fd-details" data-oldid="google-docs-sheets-slides-dialogs-search-or-filters-do-not-open">
+<summary>Google Docs / Sheets / Slides: dialogs, search or filters do not open</summary>
+
+**What happens:** Inside Google Docs, Sheets or Slides some functions stop reacting,
+for example the document search (<kbd>ctrl</kbd> + <kbd>f</kbd>), inserting a link, filters or data
+validation dialogs.
+
+**Why:** These Google apps change the address *inside* the page (without reloading it) to open
+dialogs. The ClearURLs option that protects you against tracking through this technique
+unfortunately also confuses these Google apps.
+
+**What you can do (recommended fix):**
+
+1. Click the ClearURLs icon and open the **settings** (the gear symbol).
+2. Find the option **Prevent tracking injection over history API** and turn it off.
+3. Click **Save & reload addon**.
+4. Reload the Google document. If it still fails, additionally clear your browser cache once
+   (<kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>del</kbd>, choose "Cached images and files").
+
+Your protection stays almost the same. Only this one technique is no longer blocked.
+If even that does not help, turn the **Filter** switch off while you work in Google Docs.
+
+**Bug reports:** [Addon #476](https://github.com/ClearURLs/Addon/issues/476),
+[Addon #417](https://github.com/ClearURLs/Addon/issues/417),
+[Addon #311](https://github.com/ClearURLs/Addon/issues/311)
+
+</details>
+<details className="fd-details" data-oldid="google-search-results-reload-again-and-again-in-a-loop">
+<summary>Google: search results reload again and again in a loop</summary>
+
+**What happens:** A page reloads many times in a row. You can watch the address change
+between `+` and `%20`, and sometimes the search stops completely.
+On some websites (for example Google Trends) this can even make your IP address look
+suspicious to firewalls.
+
+**Why:** Two different ways of writing a space in an address (`+` and `%20`) are converted
+back and forth between the website and ClearURLs.
+
+**What you can do:**
+
+- Turn the **Filter** switch off for searches on the affected website.
+- Make sure you have the newest add-on version and let the rules update
+  (open the **settings** and click **Save & reload addon** once. This also downloads
+  the newest rules).
+
+**Bug reports:** [Addon #308](https://github.com/ClearURLs/Addon/issues/308),
+[Addon #430](https://github.com/ClearURLs/Addon/issues/430),
+[Addon #219](https://github.com/ClearURLs/Addon/issues/219)
+
+</details>
+<details className="fd-details" data-oldid="login-does-not-work-google-sign-in-claudeai-banks-">
+<summary>Login does not work (Google sign-in, Claude.ai, banks, ...)</summary>
+
+**What happens:** You cannot sign in on a website while ClearURLs is active.
+Typical cases:
+
+- **Sign in with Google** buttons that fail or loop, including tools such as the
+  `gcloud` command-line program.
+- **Claude.ai sign-in links** ("magic links") from e-mails are rejected, because the end
+  of the sign-in code is removed from the address.
+- Some **banks and payment pages** refuse to continue.
+
+**Why:** Sign-in systems put secret one-time codes into the address. In rare cases a rule
+mistakes such a code for a tracking field and removes it.
+
+**What you can do:**
+
+- Turn the **Filter** switch off **before** you click the sign-in link, sign in,
+  then turn it back on. Most websites only need the special address *during* sign-in.
+- For Claude.ai: copy the full link from the e-mail, turn the filter off, and only then
+  open the link.
+
+**Bug reports:** [Addon #510](https://github.com/ClearURLs/Addon/issues/510),
+[Addon #258](https://github.com/ClearURLs/Addon/issues/258),
+[Addon #445](https://github.com/ClearURLs/Addon/issues/445),
+[Addon #320](https://github.com/ClearURLs/Addon/issues/320)
+
+</details>
+<details className="fd-details" data-oldid="amazon-sorting-wish-lists-or-the-shopping-cart-do-not-work">
+<summary>Amazon: sorting, wish lists or the shopping cart do not work</summary>
+
+**What happens:** On Amazon the *sort results* dropdown, editing a *wish list*, or sometimes
+the *shopping cart* does not react when ClearURLs is active.
+
+**Why:** Amazon uses some address fields for two things at once: tracking *and* shop functions.
+We maintain a list of Amazon fields that must **not** be removed, but Amazon changes its
+website often.
+
+**What you can do:**
+
+- Make sure your rules are up to date: open the ClearURLs **settings** and click
+  **Save & reload addon** once.
+- If it still fails, turn the **Filter** switch off while you shop.
+- You can read which fields we deliberately keep (and why) on the page
+  [Excluded Fields](/further_readings/excluded_fields).
+
+**Bug reports:** [Rules #227](https://github.com/ClearURLs/Rules/issues/227),
+[Rules #295](https://github.com/ClearURLs/Rules/issues/295),
+[Addon #392](https://github.com/ClearURLs/Addon/issues/392),
+[Addon #518](https://github.com/ClearURLs/Addon/issues/518)
+
+</details>
+<details className="fd-details" data-oldid="reddit-bing-linkedin-icloud-or-other-well-known-sites-misbehave">
+<summary>Reddit, Bing, LinkedIn, iCloud or other well-known sites misbehave</summary>
+
+**What happens:** Examples reported by users: Reddit search
+([Addon #505](https://github.com/ClearURLs/Addon/issues/505)), Bing autosuggest
+([Addon #447](https://github.com/ClearURLs/Addon/issues/447)),
+LinkedIn jobs ([Addon #512](https://github.com/ClearURLs/Addon/issues/512)),
+iCloud file uploads ([Rules #315](https://github.com/ClearURLs/Rules/issues/315)),
+bol.com payments ([Rules #283](https://github.com/ClearURLs/Rules/issues/283)).
+
+**What you can do:**
+
+- First update the rules: ClearURLs **settings**, then **Save & reload addon**.
+- Then try the **Filter** switch as described [above](#first-check).
+- If the problem stays, please [report it](/reporting). Such reports are exactly
+  how the rules get better.
+
+</details>
+<details className="fd-details" data-oldid="the-browser-is-suddenly-very-slow-or-uses-a-lot-of-cpu-on-some-pages">
+<summary>The browser is suddenly very slow or uses a lot of CPU on some pages</summary>
+
+**What happens:** On a few pages (reported for example for github.com/search and some
+Wikipedia pages) one processor core goes to 100% and the tab stutters.
+
+**What you can do:**
+
+- Turn the **Filter** switch off on the affected page.
+- Or open the ClearURLs settings, turn **Prevent tracking injection over history API**
+  off and click **Save & reload addon**.
+
+**Bug reports:** [Addon #454](https://github.com/ClearURLs/Addon/issues/454),
+[Addon #506](https://github.com/ClearURLs/Addon/issues/506),
+[Addon #185](https://github.com/ClearURLs/Addon/issues/185)
+
+</details>
+<Callout type="info" title="Your problem is not in this list?">
+
+Then it is still very valuable for us. Please take two minutes and
+[tell us about it](/reporting). Every reported website makes the rules better
+for everyone.
+
+</Callout>
+---
+
+## "Chrome, Edge or Brave disabled ClearURLs": the Manifest V2 situation [#mv2]
+
+<Callout type="warn" title="What is happening?">
+
+Google is gradually removing the technology (called "Manifest V2") that the current
+ClearURLs version is built on from Chrome and Chrome-based browsers.
+As a result, some browsers, for example **Brave** and newer **Chrome** versions,
+disable the add-on automatically with a message like
+*"This extension was turned off because it's no longer supported"*.
+
+</Callout>
+**What this means for you:**
+
+- **Firefox:** nothing changes. ClearURLs works and remains fully supported there.
+  Firefox has committed to keep Manifest V2 extensions working.
+- **Chrome / Brave and other Chrome-based browsers:** at the moment ClearURLs can be
+  disabled automatically by the browser. An update of the add-on for the new technology
+  (Manifest V3) is not finished yet.
+- **Microsoft Edge**: the same end is expected here as well. Microsoft builds Edge on
+  Chromium and has announced it will follow Google's Manifest V2 deprecation, so the
+  add-on will stop working on Edge in the coming months.
+
+We are sorry about this. It is a browser decision, not something the add-on can override.
+You can follow the technical discussion in the bug reports
+[Addon #527](https://github.com/ClearURLs/Addon/issues/527) and
+[Addon #528](https://github.com/ClearURLs/Addon/issues/528).
+
+---
+
+## "Can I turn ClearURLs off for just one website?" [#whitelist]
+
+**Short answer:** A real *website whitelist* ("never touch pages on example.com") is the
+most requested feature, but it is **not included in the current released version**.
+We know how important this is. It is the topic with by far the most feedback
+([Addon #93](https://github.com/ClearURLs/Addon/issues/93) with more than a hundred supporters).
+
+**What you can do today instead:**
+
+| Want to ... | How |
+|---|---|
+| Pause cleaning once to test or log in | Turn the **Filter** switch off (see [First check](#first-check)) and back on afterwards |
+| Stop only address changes *inside* a page (e.g. Google Docs) | Turn off **Prevent tracking injection over history API** in the settings |
+| Stop ETag header filtering | Turn off the **ETag filtering** option in the settings |
+| Stop hyperlink auditing (ping) blocking | Turn off the **Block hyperlink auditing** option in the settings |
+
+<Callout type="info" title="For technically interested users: your own copy of the rules">
+
+Advanced users can point the add-on to their **own copy of the rule catalog** and add an
+`exceptions` entry there for a website. You can enter the two addresses in the ClearURLs
+**settings page** (the fields *"The url to the data.json file (rules)"* and
+*"The url to the rules.hash file (hash)"*), then press **Save & reload addon**.
+
+Please note:
+
+- You have to host both files yourself and keep them up to date. Otherwise you will
+  stop receiving rule improvements.
+- The hash file content must be written in **lowercase**, otherwise the check fails
+  and the rules are rejected.
+- The format of `exceptions` is described in [Rule Catalogs](/specs/rules).
+
+</Callout>
+---
+
+## Nothing here helped?
+
+Then please have a look at the [FAQ](/faq) or, best of all,
+[report the problem to us](/reporting). It only takes a few minutes and
+helps every user of ClearURLs.

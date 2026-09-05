@@ -1,0 +1,180 @@
+---
+title: "Report a Buggy Website"
+description: "How to report a website that does not work with ClearURLs — step by step."
+icon: Bug
+---
+
+A website does not work while ClearURLs is turned on? Or an address is not cleaned even though
+it should be? **Please tell us. It is the only way the rules get better.**
+You do not need any programming knowledge. This page shows you how, step by step.
+
+<Callout type="info" title="What makes a report *good*?">
+
+A good report answers three questions:
+
+1. **Where** does it happen? → the exact address (URL)
+2. **What** goes wrong? → what you see vs. what you expected
+3. **Is ClearURLs really involved?** → one test with the filter turned off
+
+If your report contains these three things (plus, ideally, a [log export](#log)),
+we can usually reproduce and fix the problem quickly.
+
+</Callout>
+
+<Steps>
+
+<Step>
+
+## Check whether ClearURLs is really the cause [#step1]
+
+Please do this short test first. It is important, because many website problems have
+other causes (ad blockers, cookie settings, the website itself):
+
+1. Open the website with the problem.
+2. Click the **ClearURLs icon** in the browser toolbar and turn the switch
+   **Filter** (under *Configs*) off.
+3. Reload the page and try again.
+4. **Only continue if the website works with the filter off.**
+   If it is still broken, ClearURLs is not the cause, and your report would send us
+   in the wrong direction.
+5. Turn the **Filter** switch on again.
+
+More details and known cases can be found on the [Troubleshooting](/troubleshooting) page.
+
+</Step>
+
+<Step>
+
+## Check whether the problem is already known
+
+Many problems are already reported. Please take ten seconds and search:
+
+- in the [Troubleshooting list](/troubleshooting#known-problems),
+- in the [add-on bug tracker](https://github.com/ClearURLs/Addon/issues),
+- and in the [rules bug tracker](https://github.com/ClearURLs/Rules/issues).
+
+If you find your website there with the same problem, you do not need to write a new report.
+A short comment like "same problem here, example address: ..." already helps.
+
+</Step>
+
+<Step>
+
+## Create a log (the most helpful attachment) [#log]
+
+The log shows us exactly which rule changed which address. To create one:
+
+1. Click the **ClearURLs icon** in the browser toolbar.
+2. Under **Configs**, turn the switch **Logging** on.
+   *(The log is only stored locally, on your own computer.)*
+3. **Reload the website** with the problem and repeat the action that fails
+   (for example, click the button that does not react).
+4. Click the **ClearURLs icon** again and choose **Log**.
+   A page with a table of all cleaned addresses opens.
+5. Click **Export** at the top. This saves a small file named
+   `ClearURLsLogExport.json` on your computer.
+6. You can now turn **Logging** off again.
+
+Attach this `ClearURLsLogExport.json` to your report (on GitHub you can simply
+drag the file into the text field).
+
+There is also a short video tutorial that walks through the same steps:
+
+<div className="my-6 overflow-hidden rounded-xl border border-fd-border bg-fd-card shadow-sm not-prose" style={{ aspectRatio: '16 / 9' }}>
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/Rm1YkwXQDSM"
+    title="How to enable logging in ClearURLs"
+    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+    loading="lazy"
+    className="block size-full"
+  />
+</div>
+<Callout type="info" title="Second helpful thing: your settings">
+
+You can also attach an export of your settings: open the ClearURLs **settings**
+(gear symbol in the pop-up) and click the green **export** button.
+This helps us when the problem only happens with specific options.
+
+</Callout>
+
+</Step>
+
+<Step>
+
+## Open the report in the right place [#step4]
+
+ClearURLs has **two public bug trackers**. Picking the right one helps us react faster:
+
+| Your problem ... | Report it here |
+|---|---|
+| One specific **website** is broken, or one specific **address** is not cleaned | [ClearURLs Rules: new issue](https://github.com/ClearURLs/Rules/issues/new) |
+| The add-on itself: crashes, buttons do nothing, settings lost, browser disables it, feature ideas | [ClearURLs Add-on: new issue](https://github.com/ClearURLs/Addon/issues/new) |
+
+<Callout type="info" title="Not sure?">
+
+If you are unsure, open the report in the **Rules** tracker. Wrongly filed reports
+are no problem, we can move them.
+
+</Callout>
+
+</Step>
+
+<Step>
+
+## Write the report (you can copy this template)
+
+A clear, friendly text is enough. If you like, copy this template and fill in the blanks:
+
+```markdown title="bug report template"
+**Website address (URL):**
+(paste the complete address from the address bar. If it contains anything
+private, you may replace that part with ***)
+
+**What I did:**
+(e.g. "I clicked the login button")
+
+**What happened:**
+(e.g. "The page reloads in a loop")
+
+**What I expected instead:**
+(e.g. "The login page should open")
+
+**Test with the Filter switch turned off:**
+(e.g. "With the filter off, everything works")
+
+**My versions:**
+- ClearURLs version: (see the ClearURLs settings page, e.g. 1.27.3)
+- Browser + version: (e.g. Firefox 128)
+- Operating system: (e.g. Windows 11)
+
+**Attachments:**
+- [ ] Log export (ClearURLsLogExport.json), see step 3
+- [ ] Screenshot (optional)
+```
+
+<Callout type="info" title="One real example of a short, perfect report">
+
+> *"Address: `https://colabsandbox.google.com/...login...`
+> When I click the e-mail sign-in link, the page says the link is invalid.
+> With the Filter switch off, the same link works.
+> The log shows that ClearURLs removed `==` from the end of the address.
+> ClearURLs 1.27.3, Firefox 128, Windows 11. Log attached."*
+
+This contains everything we need: the address, the failing action, the comparison
+with the filter off, and the log.
+
+</Callout>
+
+</Step>
+
+</Steps>
+
+## What happens after your report?
+
+- The rules are maintained by volunteers, so answers can take some days.
+- When the rule is fixed, the add-on downloads the new rules **automatically**.
+  You do not have to reinstall anything.
+- Maybe we ask you a follow-up question in the report. A quick answer helps a lot.
+
+Thank you for taking the time. Reports like yours are how ClearURLs improves. 💙
