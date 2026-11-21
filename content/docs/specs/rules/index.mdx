@@ -53,6 +53,7 @@ Every provider has the following properties:
 - `referralMarketing` (optional)
 - `exceptions` (optional)
 - `redirections` (optional)
+- [`redirectRules`](#redirectrules) (optional)
 - `forceRedirection` (optional)
 
 <Callout type="info" title="Example of a data.min.json file">
@@ -66,7 +67,14 @@ Every provider has the following properties:
       "rawRules": ["/ref=[^/|?]*"],
       "referralMarketing": ["tag"],
       "exceptions": ["^https?://(?:[a-z0-9-]+\\.)*?domainName\\.com/re.*/redirector.html/"],
-      "redirections": ["^https?://(?:[a-z0-9-]+\\.)*?domainName\\.com.*url\\?.*url=([^&]+)"]
+      "redirections": ["^https?://(?:[a-z0-9-]+\\.)*?domainName\\.com.*url\\?.*url=([^&]+)"],
+      "redirectRules": [
+        {
+          "id": "outbound-target",
+          "match": { "regex": "[?&]target=([^&#]+)" },
+          "preprocessors": [{ "type": "urlDecode", "inputs": [1] }]
+        }
+      ]
     }
   }
 }
@@ -115,11 +123,113 @@ The **exceptions** property is also a JSON array. Every element in this array is
 If ClearURLs found a URL, that matches an exception, no further processing on this URL is done.
 
 ### `redirections`
-The **redirections** property is a JSON array. Every element in this array is a regular expression, that matches a URL and 
-must follow a specification. 
-The [first regular expression group](https://www.regular-expressions.info/brackets.html) must be the URL that should be redirected. 
-If ClearURLs find a URL that matches the redirection, the first matching group will be decoded with will `decodeURIComponent()` and
-replaces the old URL.
+The **redirections** property is an array of regular expressions that match URLs.
+The [first regular expression group](https://www.regular-expressions.info/brackets.html)
+supplies the redirect target. These rules use the legacy decoder.
+
+### `redirectRules`
+
+ClearURLs 1.28.0 supports `redirectRules` as an optional array on each provider in
+`data.min.json`. Use it to decode captures or build a target from several captures.
+The same provider can also define `redirections`. ClearURLs 1.27.3 reads the legacy
+`redirections` array and ignores `redirectRules`.
+
+| Field | Meaning |
+| --- | --- |
+| `id` | Required. Use a stable ID unique within the provider, with lowercase ASCII letters, digits, hyphens or underscores. |
+| `match.regex` | Required. A regular expression applied to the original redirect URL after the provider matches. Use capturing groups for values needed by the target. |
+| `match.caseSensitive` | Defaults to `true`. Set it to `false` to match case-insensitively, as legacy `redirections` do. |
+| `preprocessors` | Optional ordered list of up to 16 capture transformations. Omit it to use the captures as matched. |
+| `replacePattern` | Optional target template containing literal text and numbered references such as `§1§` and `§2§`. Defaults to `§1§`. |
+| `defaultScheme` | Optional `http` or `https`. Applied after the template to complete a host with an optional path or a scheme-relative URL. A valid HTTP(S) scheme already present in the target is retained. |
+
+Each preprocessor requires a `type` and `inputs`. Capture numbering starts at **1**.
+Use an array of distinct positive capture numbers or `"all"` to select every
+capture group. Only participating groups are transformed. An empty participating
+group expands to an empty string. A missing group referenced by the template or an
+input number beyond the regex's groups makes the match unusable.
+
+| Preprocessor | Operation |
+| --- | --- |
+| `urlDecode` | Applies `decodeURIComponent()` and preserves literal `+`. |
+| `formDecode` | Replaces literal `+` with spaces and then decodes percent escapes. |
+| `base64Decode` | Decodes canonical standard Base64 to UTF-8 text. |
+| `base64UrlDecode` | Decodes Base64url to UTF-8 text, with or without padding. |
+| `urlEncode` | Applies `encodeURIComponent()`, for example before inserting data into a query value. |
+| `base64Encode` | Encodes UTF-8 text as standard Base64. |
+
+ClearURLs applies the preprocessors in order, fills the template, and then
+applies `defaultScheme` if needed. The final target must be an absolute HTTP(S)
+URL. Raw control characters in captures or produced by a preprocessor invalidate
+the match. ClearURLs uses the validated target string as assembled, including its
+remaining percent escapes.
+
+ClearURLs compiles the rules when loading the provider. Invalid configurations,
+including unknown fields or operations and invalid regexes, are skipped.
+For a repeated explicit ID, ClearURLs keeps the first successfully compiled rule.
+Explicit rules with distinct IDs can share the same regex. A successfully compiled
+explicit rule suppresses a legacy entry with the same regex string, even if the
+explicit rule fails to produce a target.
+
+At runtime, ClearURLs tries the explicit rules in array order, then the eligible
+legacy rules. The first match that yields a valid target wins. If a match fails
+to produce a target, the next explicit rule can use the same regex with a
+different ID.
+
+#### Examples
+
+This provider excerpt shows a percent-encoded target with a literal fallback, a
+form-encoded search term, and a Base64url value assembled into a URL with two
+captures.
+
+```json title="Redirect fields within a provider"
+{
+  "redirectRules": [
+    {
+      "id": "outbound-target",
+      "match": { "regex": "[?&]target=([^&#]+)" },
+      "preprocessors": [{ "type": "urlDecode", "inputs": [1] }]
+    },
+    {
+      "id": "outbound-literal",
+      "match": { "regex": "[?&]target=([^&#]+)" }
+    },
+    {
+      "id": "shop-search",
+      "match": { "regex": "[?&]shop=([a-z0-9.-]+)&q=([^&#]+)" },
+      "preprocessors": [
+        { "type": "formDecode", "inputs": [2] },
+        { "type": "urlEncode", "inputs": [2] }
+      ],
+      "replacePattern": "§1§/search?q=§2§",
+      "defaultScheme": "https"
+    },
+    {
+      "id": "document-view",
+      "match": { "regex": "[?&]doc=([a-z0-9-]+)&view=([^&#]+)" },
+      "preprocessors": [
+        { "type": "base64UrlDecode", "inputs": [2] },
+        { "type": "urlEncode", "inputs": [2] }
+      ],
+      "replacePattern": "https://docs.example/§1§?view=§2§"
+    }
+  ],
+  "redirections": ["[?&]legacy=([^&#]+)"]
+}
+```
+
+| Query on the redirect URL | Exact target |
+| --- | --- |
+| `?target=https%3A%2F%2Fshop.example%2Fa%252Fb` | `https://shop.example/a%2Fb` |
+| `?target=https://shop.example/a%FF` | `https://shop.example/a%FF` |
+| `?shop=shop.example&q=tea+biscuits%2Bmore` | `https://shop.example/search?q=tea%20biscuits%2Bmore` |
+| `?doc=abc&view=ZGV0YWlsICYgbm90ZXM` | `https://docs.example/abc?view=detail%20%26%20notes` |
+| `?target=https%3A%2F%2F%5Binvalid%5D%2F&legacy=https%3A%2F%2Fshop.example%2Fhome` | `https://shop.example/home` |
+
+In the second example, the percent decoder cannot decode the legacy byte
+`%FF`, so `outbound-literal` uses the capture as the target. In the last
+example, both matching explicit rules fail and the distinct legacy rule
+supplies the target.
 
 ### `forceRedirection`
 Some websites, such as Google, have manipulated URLs (`<a>` tags) in such a way that the URL is no
