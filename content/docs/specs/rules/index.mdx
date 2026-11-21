@@ -125,7 +125,9 @@ If ClearURLs found a URL, that matches an exception, no further processing on th
 ### `redirections`
 The **redirections** property is an array of regular expressions that match URLs.
 The [first regular expression group](https://www.regular-expressions.info/brackets.html)
-supplies the redirect target. These rules use the legacy decoder.
+supplies the redirect target. The legacy decoder repeatedly percent-decodes the
+whole capture, as in ClearURLs 1.27.3. Use [`redirectRules`](#redirectrules) to
+control the number of decoding steps or to preserve escapes in the target.
 
 ### `redirectRules`
 
